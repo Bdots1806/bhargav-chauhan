@@ -1,0 +1,96 @@
+<div class="container">
+  <h2>Employee</h2>
+  <div class="card">
+    <div class="form-row">
+      <div class="col-md-6">
+        <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+          <input class="form-control" type="hidden" name="_id" #_id="ngModel"
+            [(ngModel)]="employeeService.selectedEmployee._id">
+          <div class="form-group">
+            <label>Name :<label class="red-text">*</label></label>
+            <input class="form-control" type="text" name="name" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.name" placeholder="Enter full name" required>
+            <label>Mobile No :</label>
+            <input class="form-control" type="number" name="mnumber" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.mnumber" placeholder="Enter Mobile Number">
+            <label>Address :</label>
+            <input class="form-control" type="text" name="address" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.address" placeholder="Enter Address">
+            <label>City :</label>
+            <input class="form-control" type="text" name="city" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.city" placeholder="Enter your city">
+            <label>State :</label>
+            <input class="form-control" type="text" name="state" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.state" placeholder="Enter your state">
+            <label>Country :</label>
+            <input class="form-control" type="text" name="country" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.country" placeholder="Enter your country">
+            <label>Gender :</label><br>
+            <select class="form-control" name="gender" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.gender">
+              <option value="Male" selected>Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <!-- <label>male</label>
+            <input class="form-control" type="radio" name="gander" value="male" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.gender" placeholder="Enter your Gender">
+            <label>female</label>
+            <input class="form-control" type="radio" name="gander" value="female" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.gender" placeholder="Enter your Gender">
+            <label>Other</label>
+            <input class="form-control" type="radio" name="gander" value="other" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.gender" placeholder="Enter your Gender"> -->
+            <label>Department :</label>
+            <select class="form-control" style="display: block;" name="department" #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.department">
+              <option selected>----Select----</option>
+              <option *ngFor="let dep of employeeService.departments" value="{{dep.name}}">{{dep.name}}</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <button class="btn btn-primary" type="button" (click)="resetForm(employeeForm)">Reset</button>
+            <button class="btn btn-success" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobiile no</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Gender</th>
+            <th>Department</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr *ngFor="let emp of employeeService.employees">
+          <td>{{emp.name}}</td>
+          <td>{{emp.mnumber}}</td>
+          <td>{{emp.address}}</td>
+          <td>{{emp.city}}</td>
+          <td>{{emp.state}}</td>
+          <td>{{emp.country}}</td>
+          <td>{{emp.gender}}</td>
+          <td>{{emp.department}}</td>
+          <td>
+            <a class="action-btn" (click)="onEdit(emp)">
+              <i class="material-icons">edit</i>
+            </a>
+            <a class="action-btn" (click)="onDelete(emp._id,employeeForm)">
+              <i class="material-icons">delete</i>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

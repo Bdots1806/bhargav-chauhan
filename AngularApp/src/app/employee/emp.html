@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="card">
+    <div class="card">
+      <div class="card-content white-text">
+        <div class="form-row">
+          <div class="col-md-6">
+            <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.name"
+                    placeholder="Enter full name" required>
+                  <label>Name :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="number" name="mnumber" #name="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.mnumber" placeholder="Enter Mobile Number">
+                  <label>Mobile No :</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="address" #name="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.address" placeholder="Enter Address">
+                  <label>Address :</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="city" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.city"
+                    placeholder="Enter your city">
+                  <label>City :</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="state" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.state"
+                    placeholder="Enter your state">
+                  <label>State :</label>
+                </div>
+                <div class="input-field col s12">
+                  <input type="text" name="country" #name="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.country" placeholder="Enter your country">
+                  <label>Country :</label>
+                </div>
+                <div class="row col s12">
+                  <input type="radio" name="gaender" value="male" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.gender"
+                    placeholder="Enter your Gender">
+                    <label>male</label>
+                    <input type="radio" name="gander" value="female" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.gender"
+                    placeholder="Enter your Gender">
+                    <label>female</label>
+                    <input type="radio" name="gander" value="other" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.gender"
+                    placeholder="Enter your Gender">
+                    <label>Other</label>
+                  <label>Gender :</label>
+                  <br><br><br>
+                </div>
+                <div class="input-field col s12">
+                  <!-- <input type="text" name="department" #name="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.department" placeholder="Enter your Department"> -->
+                  <select style="display: block;" name="department" #name="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.department" >
+                    <option selected>----Select----</option>
+                    <option *ngFor="let dep of employeeService.departments" value="{{dep.name}}">{{dep.name}}</option>
+                  </select>
+                  <label>Department :</label>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <button class="btn btn-custom right" type="button" (click)="resetForm(employeeForm)">Reset</button>
+                  <button class="btn btn-custom right" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="card2">
+<div class="row">
+  <div class="col s7">
+    <table class="responsive-table highlight">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Mobiile no</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>Gender</th>
+          <th>Department</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr *ngFor="let emp of employeeService.employees">
+        <td>{{emp.name}}</td>
+        <td>{{emp.mnumber}}</td>
+        <td>{{emp.address}}</td>
+        <td>{{emp.city}}</td>
+        <td>{{emp.state}}</td>
+        <td>{{emp.country}}</td>
+        <td>{{emp.gender}}</td>
+        <td>{{emp.department}}</td>
+        <td>
+          <a class="action-btn" (click)="onEdit(emp)">
+            <i class="material-icons">edit</i>
+          </a>
+          <a class="action-btn" (click)="onDelete(emp._id,employeeForm)">
+            <i class="material-icons">delete</i>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</div>
